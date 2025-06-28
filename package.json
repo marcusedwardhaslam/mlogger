@@ -1,0 +1,23 @@
+{
+  "name": "mlogger",
+  "version": "0.0.1",
+  "description": "M's typescript logger",
+  "main": "lib/index.js",
+  "repository": "https://github.com/marcusedwardhaslam/mlogger",
+  "author": "Marcus Haslam <marcusedwardhaslam@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.6",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "eslint": "^9.30.0",
+    "jest": "^30.0.3",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
