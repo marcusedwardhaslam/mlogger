@@ -1,7 +1,9 @@
+import type { Transport } from './transports/transport';
+
 export type LogLevel = 'emerg' | 'alert' | 'crit' | 'error' | 'warn' | 'notice' | 'info' | 'debug';
 
 interface LoggerOptions {
-  transport: (level: LogLevel, message: string, metadata?: Record<PropertyKey, unknown>) => void;
+  transport: Transport;
   level: LogLevel;
 }
 
@@ -23,7 +25,7 @@ export class Logger {
     const currentLevelIndex = Logger.LEVEL_RANKS[this.options.level];
     const messageLevelIndex = Logger.LEVEL_RANKS[level];
     if (messageLevelIndex > currentLevelIndex) return;
-    this.options.transport(level, message, extra);
+    this.options.transport.log(level, message, extra);
   }
 
   public debug(message: string, extra?: Record<PropertyKey, unknown>): void {
