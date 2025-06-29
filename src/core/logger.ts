@@ -1,4 +1,4 @@
-type LogLevel = 'emerg' | 'alert' | 'crit' | 'error' | 'warn' | 'notice' | 'info' | 'debug';
+export type LogLevel = 'emerg' | 'alert' | 'crit' | 'error' | 'warn' | 'notice' | 'info' | 'debug';
 
 interface LoggerOptions {
   transport: (level: LogLevel, message: string, metadata?: Record<PropertyKey, unknown>) => void;
