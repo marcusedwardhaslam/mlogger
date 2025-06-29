@@ -1,7 +1,7 @@
 type LogLevel = 'emerg' | 'alert' | 'crit' | 'error' | 'warn' | 'notice' | 'info' | 'debug';
 
 interface LoggerOptions {
-  transport: (message: string, level: LogLevel) => void;
+  transport: (level: LogLevel, message: string, metadata?: Record<PropertyKey, unknown>) => void;
   level: LogLevel;
 }
 
@@ -19,43 +19,42 @@ export class Logger {
 
   constructor(private options: LoggerOptions) {}
 
-  private log(message: string, level: LogLevel): void {
+  private log(level: LogLevel, message: string, extra?: Record<PropertyKey, unknown>): void {
     const currentLevelIndex = Logger.LEVEL_RANKS[this.options.level];
     const messageLevelIndex = Logger.LEVEL_RANKS[level];
     if (messageLevelIndex > currentLevelIndex) return;
-
-    this.options.transport(message, level);
+    this.options.transport(level, message, extra);
   }
 
-  public debug(message: string): void {
-    this.log(message, 'debug');
+  public debug(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('debug', message, extra);
   }
 
-  public info(message: string): void {
-    this.log(message, 'info');
+  public info(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('info', message, extra);
   }
 
-  public notice(message: string): void {
-    this.log(message, 'notice');
+  public notice(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('notice', message, extra);
   }
 
-  public warn(message: string): void {
-    this.log(message, 'warn');
+  public warn(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('warn', message, extra);
   }
 
-  public error(message: string): void {
-    this.log(message, 'error');
+  public error(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('error', message, extra);
   }
 
-  public critical(message: string): void {
-    this.log(message, 'crit');
+  public critical(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('crit', message, extra);
   }
 
-  public alert(message: string): void {
-    this.log(message, 'alert');
+  public alert(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('alert', message, extra);
   }
 
-  public emergency(message: string): void {
-    this.log(message, 'emerg');
+  public emergency(message: string, extra?: Record<PropertyKey, unknown>): void {
+    this.log('emerg', message, extra);
   }
 }
