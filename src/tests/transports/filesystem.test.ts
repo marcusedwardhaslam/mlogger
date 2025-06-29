@@ -1,4 +1,4 @@
-import { FileSystemTransport } from '../../core/transports/filesystem';
+import { FileSystemTransport } from '../../core/transports/fileSystem';
 
 describe('filesystem transport', () => {
   describe('when the transport is called', () => {

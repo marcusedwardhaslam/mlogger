@@ -1,10 +1,9 @@
 import type { LogLevel } from '../logger';
+import type { ContentWriter } from './contentWriter';
 
 interface FileSystemTransportOptions {
   filePath: string;
-  writer: {
-    append: (filePath: string, content: string) => Promise<void>;
-  };
+  writer: ContentWriter;
 }
 
 export class FileSystemTransport {
