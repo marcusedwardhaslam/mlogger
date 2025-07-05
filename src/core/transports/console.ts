@@ -2,12 +2,8 @@ import type { LogLevel } from '../logger';
 
 import { Transport } from './transport';
 
-interface ConsoleTransportOptions {
-  level: LogLevel;
-}
-
 export class ConsoleTransport implements Transport {
-  constructor(private options: ConsoleTransportOptions) {}
+  constructor() {}
 
   log(level: LogLevel, message: string, metadata?: Record<PropertyKey, unknown>): Promise<void> {
     const timestamp = new Date().toISOString();

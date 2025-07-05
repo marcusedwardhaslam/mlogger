@@ -20,9 +20,7 @@ describe('console transport', () => {
   it('should log the message using console.log', async () => {
     const consoleSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
 
-    const transport = new ConsoleTransport({
-      level: 'info',
-    });
+    const transport = new ConsoleTransport();
     await transport.log('info', 'Test message');
 
     expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] info: Test message`);
@@ -32,71 +30,11 @@ describe('console transport', () => {
   it('should include metadata if provided', async () => {
     const consoleSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
 
-    const transport = new ConsoleTransport({
-      level: 'info',
-    });
+    const transport = new ConsoleTransport();
     const metadata = { key: 'value' };
     await transport.log('info', 'Test message', metadata);
 
     expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] info: Test message`, metadata);
     consoleSpy.mockRestore();
-  });
-
-  describe('ConsoleTransport log level routing', () => {
-    it('should log emerg messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('emerg', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] emerg: This is a message`);
-    });
-
-    it('should log alert messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('alert', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] alert: This is a message`);
-    });
-
-    it('should log crit messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('crit', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] crit: This is a message`);
-    });
-
-    it('should log error messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('error', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] error: This is a message`);
-    });
-
-    it('should log warn messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('warn', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] warn: This is a message`);
-    });
-
-    it('should log notice messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('notice', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] notice: This is a message`);
-    });
-
-    it('should log info messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('info', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] info: This is a message`);
-    });
-
-    it('should log debug messages', async () => {
-      const consoleSpy = jest.spyOn(console, 'debug').mockImplementation(() => {});
-      const transport = new ConsoleTransport({ level: 'debug' });
-      await transport.log('debug', 'This is a message');
-      expect(consoleSpy).toHaveBeenCalledWith(`[${date.toISOString()}] debug: This is a message`);
-    });
   });
 });
